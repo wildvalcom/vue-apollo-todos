@@ -147,7 +147,6 @@ export default {
            data.forEach(({ todos: list }) => {
              const index = list.findIndex(o => o.id === todo.id)
              if (index !== -1) {
-               console.log(todo.completed, this.filter);
                if (todo.completed && this.filter === 'ACTIVE' || !todo.completed && this.filter === 'COMPLETED') {
                  list.splice(index, 1)
                } else {

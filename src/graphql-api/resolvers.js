@@ -1,13 +1,8 @@
 const shortid = require('shortid')
 
 module.exports = {
-  Counter: {
-    countStr: counter => `Current count: ${counter.count}`,
-  },
-
   Query: {
     todos: (root, args, { db }) => {
-      console.log(args);
       let { filter = 'ALL', orderBy } = args
       let todos = db.get('todos')
       let filterBy = {}
@@ -93,21 +88,6 @@ module.exports = {
   },
 
   Subscription: {
-    counter: {
-      subscribe: (parent, args, { pubsub }) => {
-        const channel = Math.random().toString(36).substring(2, 15) // random channel name
-        let count = 0
-        setInterval(() => pubsub.publish(
-          channel,
-          {
-            // eslint-disable-next-line no-plusplus
-            counter: { count: count++ },
-          }
-        ), 2000)
-        return pubsub.asyncIterator(channel)
-      },
-    },
-
     todoAdded: {
       subscribe: (parent, args, { pubsub }) => pubsub.asyncIterator('todos'),
     },

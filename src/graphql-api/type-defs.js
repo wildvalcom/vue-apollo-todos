@@ -1,14 +1,4 @@
 module.exports = `
-# It will increment!
-type Counter {
-  # Number of increments
-  count: Int!
-  # Full message for testing
-  countStr: String
-}
-
-
-
 type Todo {
   id: ID!
   title: String!
@@ -53,8 +43,6 @@ type deleteTodoPayload {
 }
 
 
-
-
 type Query {
   todos(filter: TodoFilter, orderBy: TodoOrderBy): [Todo]
 }
@@ -68,8 +56,6 @@ type Mutation {
 }
 
 type Subscription {
-  # This will update every 2 seconds
-  counter: Counter!
   # When a new todo is added
   todoAdded: Todo!
 }
