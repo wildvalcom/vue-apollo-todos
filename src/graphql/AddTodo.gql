@@ -1,0 +1,9 @@
+#import "./TodoFragment.gql"
+
+mutation addTodo ($input: addTodoInput!) {
+  addTodo (input: $input) {
+    todo {
+      ...Todo
+    }
+  }
+}

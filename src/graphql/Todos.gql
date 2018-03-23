@@ -1,0 +1,7 @@
+#import "./TodoFragment.gql"
+
+query todos($filter: TodoFilter, $orederBy: TodoOrderBy) {
+  todos(filter: $filter, orderBy: $orederBy) {
+    ...Todo
+  }
+}

@@ -1,0 +1,7 @@
+#import "./TodoFragment.gql"
+
+subscription todoAdded {
+  todoAdded {
+    ...Todo
+  }
+}
