@@ -7,6 +7,7 @@ Visual means that this project does not attempt to implement an MVC pattern of t
 Libraries used on client side:
 
 - Vue 2
+- vue-router
 - vue-apollo
 - Vuetify
 - graphql
@@ -15,6 +16,12 @@ Libraries used on client side:
 - apollo-cache
 
 ## See the project running
+
+Install packages:
+
+```
+yarn Install
+```
 
 Start GraphQL API Server, open a new terminal:
 

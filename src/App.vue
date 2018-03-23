@@ -1,8 +1,6 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png" width="100">
-    <Todos />
-  </div>
+<template lang="pug">
+    v-app
+      router-view
 </template>
 
 <script>

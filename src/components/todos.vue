@@ -25,7 +25,6 @@
 
                 todos-footer.py-2(
                   :remaining-items="remainingItems"
-                  @filter-items="filterItems"
                   @clear-completed="clearCompleted"
                 )
 
@@ -63,7 +62,6 @@ export default {
      return {
        newTodo: '',
        todos: null,
-       filter: null,
        orderBy: null
      }
    },
@@ -73,7 +71,7 @@ export default {
        query: TODOS_ALL,
        variables() {
         return {
-          filter: this.filter,
+          filter: this.visibility.toUpperCase(),
         }
       },
        loadingKey: 'loading',
@@ -83,8 +81,11 @@ export default {
          }
        },
        fetchPolicy: 'cache-and-network',
-       subscribeToMore: [{
+       subscribeToMore: {
          document: TODO_ADDED,
+         skip() {
+           return this.visibility === 'completed'
+         },
          updateQuery: (previousResult, { subscriptionData }) => {
            return {
              todos: [
@@ -93,7 +94,7 @@ export default {
              ],
            }
          },
-       }],
+       },
      }
    },
 
@@ -138,16 +139,19 @@ export default {
              {
                query: TODOS_ALL,
                variables: {
-                 filter: this.filter,
+                 filter: this.visibility.toUpperCase(),
                },
              },
            ]
-           // FIX store
+
            const data = queries.map(query => store.readQuery(query))
            data.forEach(({ todos: list }) => {
              const index = list.findIndex(o => o.id === todo.id)
              if (index !== -1) {
-               if (todo.completed && this.filter === 'ACTIVE' || !todo.completed && this.filter === 'COMPLETED') {
+               if (
+                 todo.completed && this.visibility.toUpperCase() === 'ACTIVE' ||
+                 !todo.completed && this.visibility.toUpperCase() === 'COMPLETED'
+               ) {
                  list.splice(index, 1)
                } else {
                  list[index] = todo
@@ -177,7 +181,7 @@ export default {
              {
                query: TODOS_ALL,
                variables: {
-                 filter: this.filter,
+                 filter: this.visibility.toUpperCase(),
                },
              },
            ]
@@ -196,19 +200,6 @@ export default {
            })
          },
        })
-     },
-
-     filterItems(filter) {
-       switch (filter) {
-         case 'active':
-           this.filter = 'ACTIVE'
-           break;
-         case 'completed':
-           this.filter = 'COMPLETED'
-           break;
-         default:
-           this.filter = 'ALL'
-       }
      },
 
      completeAll() {

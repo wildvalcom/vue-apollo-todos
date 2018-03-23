@@ -2,12 +2,12 @@
     .grey--text.pl-3
         v-layout(justify-space-between, align-baseline)
             span(v-if="remainingItems === -1" )
-            span(v-if="remainingItems >=0" ) {{ remainingItems | pluralize }} left
+            span(v-if="remainingItems >= 0" ) {{ remainingItems | pluralize }} left
             span
-                v-btn-toggle
-                    v-btn(small, flat, value='', @click="$emit('filter-items')") All
-                    v-btn(small, flat, value='active', @click="$emit('filter-items', 'active')") Active
-                    v-btn(small, flat, value='completed', @click="$emit('filter-items', 'completed')") Completed
+                v-btn-toggle(v-model="selectedFilter")
+                    v-btn(small, flat, value='', to="/all") All
+                    v-btn(small, flat, value='active', to="/active") Active
+                    v-btn(small, flat, value='completed', to="/completed") Completed
             span
                 v-btn(flat, color="grey", @click="$emit('clear-completed')") Clear completed
 
