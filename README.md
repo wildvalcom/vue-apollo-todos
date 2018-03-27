@@ -6,10 +6,10 @@ Visual means that this project does not attempt to implement an MVC pattern of t
 
 Libraries used on client side:
 
-- Vue 2
+- vue 2
 - vue-router
 - vue-apollo
-- Vuetify
+- vuetify
 - graphql
 - apollo-client
 - apollo-link
@@ -19,9 +19,9 @@ Libraries used on client side:
 
 Install packages:
 
-```
-yarn Install
-```
+```yarn install```
+or 
+```npm install```
 
 Start GraphQL API Server, open a new terminal:
 
